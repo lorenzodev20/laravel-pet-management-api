@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Traits\ApiResponseTrait;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Knuckles\Scribe\Attributes\Group;
 use App\Repositories\PersonRepository;
 use App\Http\Requests\SamplePaginatorRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,10 @@ use App\Http\Resources\Api\V1\Person\PersonResource;
 use App\Http\Resources\Api\V1\Person\PersonCollection;
 use App\Http\Requests\Api\V1\Person\CreatePersonRequest;
 use App\Http\Requests\Api\V1\Person\UpdatePersonRequest;
+use Knuckles\Scribe\Attributes\Authenticated;
 
+#[Group("Personas", "API RESTful para la gestión de las personas dueñas de las mascotas")]
+#[Authenticated()]
 class PersonController extends Controller
 {
     use ApiResponseTrait;

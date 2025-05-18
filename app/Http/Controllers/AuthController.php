@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\RegisterRequest;
-use App\Http\Resources\Auth\UserResource;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,16 +9,19 @@ use Illuminate\Http\JsonResponse;
 use Firebase\JWT\ExpiredException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use Knuckles\Scribe\Attributes\Group;
+use App\Http\Resources\Auth\UserResource;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Auth\RegisterRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 
+#[Group("Auth", "Autenticación de un usuario en el API")]
 class AuthController extends Controller
 {
     /**
      * Get a JWT via given credentials.
-     *
      * @return JsonResponse
      */
     public function login(): JsonResponse
@@ -49,7 +50,7 @@ class AuthController extends Controller
 
     /**
      * Get the authenticated User.
-     *
+     * @authenticated
      * @return JsonResponse
      */
     public function me(): JsonResponse
@@ -59,7 +60,7 @@ class AuthController extends Controller
 
     /**
      * Log the user out (Invalidate the token).
-     *
+     * @authenticated
      * @return JsonResponse
      */
     public function logout(): JsonResponse
@@ -71,7 +72,7 @@ class AuthController extends Controller
 
     /**
      * Refresh a token.
-     *
+     * @authenticated
      * @return JsonResponse
      */
     public function refresh(): JsonResponse

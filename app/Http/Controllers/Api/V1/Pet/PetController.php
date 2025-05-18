@@ -11,16 +11,20 @@ use App\Traits\ApiResponseTrait;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\PetRepository;
 use App\Http\Controllers\Controller;
+use Knuckles\Scribe\Attributes\Group;
 use App\Repositories\PersonRepository;
 use App\Services\TheCatApi\CatService;
 use App\Services\Pet\CompletePetService;
 use App\Http\Requests\SamplePaginatorRequest;
+use Knuckles\Scribe\Attributes\Authenticated;
 use App\Http\Resources\Api\V1\Pet\PetResource;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\Api\V1\Pet\PetCollection;
 use App\Http\Requests\Api\V1\Pet\CreatePetRequest;
 use App\Http\Requests\Api\V1\Pet\UpdatePetRequest;
 
+#[Group("Mascotas", "API RESTful para la gestión de las mascotas")]
+#[Authenticated()]
 class PetController extends Controller
 {
     use ApiResponseTrait;
@@ -28,7 +32,6 @@ class PetController extends Controller
     public function __construct(
         private PetRepository $petRepository,
         private PersonRepository $personRepository,
-        private CatService $catService,
         private CompletePetService $completePetService
     ) {}
     /**
@@ -64,22 +67,6 @@ class PetController extends Controller
             $model->person()->associate(
                 $this->personRepository->get($personId)
             );
-
-            // # Propiedades del api externa
-            // $breedProps = $this->catService->getBreedProperties($model?->breed)[0];
-
-            // if(empty($breedProps))
-            // {
-            //     throw new Exception("Información de la raza no encontrada, consulte el listado de razas disponibles",404);
-            // }
-
-            // $referenceImage = $this->catService->getReferenceImage($breedProps?->reference_image_id);
-
-            // #Adicionar al modelo
-            // $model->life_span = $breedProps?->life_span;
-            // $model->adaptability = $breedProps?->adaptability;
-            // $model->reference_image_id = $breedProps?->reference_image_id;
-            // $model->image_url = $referenceImage?->url;
 
             DB::beginTransaction();
             $this->petRepository->save($model);
