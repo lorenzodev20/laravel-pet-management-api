@@ -24,6 +24,10 @@ class PetWithOwnerResource extends JsonResource
             "species" => $this->species,
             "breed" => $this->breed,
             "age" => $this->age,
+            "image_url" => $this->image_url,
+            "life_span" => $this->life_span,
+            "adaptability" => $this->adaptability,
+            "reference_image_id" => $this->reference_image_id,
             "created_at" => $this->created_at->format('Y-m-d'),
             "owner" => new PersonResource($this->person)
         ];

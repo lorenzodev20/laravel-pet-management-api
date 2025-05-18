@@ -105,7 +105,7 @@ class PetController extends Controller
             $this->petRepository->updateDirtyData($request, $id);
             $this->completePetService->completeBreedInformation(Pet::find($id));
             DB::commit();
-            return $this->responseWithData("Registro actualizado", Response::HTTP_OK);
+            return $this->responseWithoutData(["message" => "Registro actualizado"], Response::HTTP_OK);
         } catch (\Throwable $th) {
             DB::rollBack();
             return $this->responseErrorByException($th);
@@ -119,7 +119,7 @@ class PetController extends Controller
     {
         try {
             Pet::find($id)?->delete();
-            return $this->responseWithData("Registro eliminado", Response::HTTP_OK);
+            return $this->responseWithoutData(["message" => "Registro eliminado"], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return $this->responseErrorByException($th);
         }

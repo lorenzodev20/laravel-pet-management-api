@@ -58,7 +58,12 @@ class PersonController extends Controller
             $model->email = $request->input('email');
             $model->birthdate = $request->input('birthdate');
             $this->personRepository->save($model);
-            return $this->responseWithData("Registro creado!", Response::HTTP_CREATED);
+
+            return $this->responseWithoutData([
+                "message" => "Registro creado!",
+                "data" => new PersonResource($model)
+            ], Response::HTTP_CREATED);
+
         } catch (\Throwable $th) {
             return $this->responseErrorByException($th);
         }
@@ -83,7 +88,7 @@ class PersonController extends Controller
     {
         try {
             $this->personRepository->updateDirtyData($request, $id);
-            return $this->responseWithData("Registro actualizado", Response::HTTP_OK);
+            return $this->responseWithoutData(["message" => "Registro actualizado"], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return $this->responseErrorByException($th);
         }
@@ -96,7 +101,7 @@ class PersonController extends Controller
     {
         try {
             Person::find($id)?->delete();
-            return $this->responseWithData("Registro eliminado", Response::HTTP_OK);
+            return $this->responseWithoutData(["message" => "Registro eliminado"], Response::HTTP_OK);
         } catch (\Throwable $th) {
             return $this->responseErrorByException($th);
         }

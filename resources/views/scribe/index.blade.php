@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Fourgen Test API Documentation</title>
+    <title>Laravel API Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -1329,7 +1329,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/pet/1" \
+    --get "http://localhost/api/v1/pet/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1337,7 +1337,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet/1"
+    "http://localhost/api/v1/pet/17"
 );
 
 const headers = {
@@ -1354,7 +1354,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet/1';
+$url = 'http://localhost/api/v1/pet/17';
 $response = $client-&gt;get(
     $url,
     [
@@ -1372,7 +1372,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <span id="example-responses-GETapi-v1-pet--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (404):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -1384,7 +1384,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: &quot;Invalid tokenWrong number of segments&quot;
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Pet] 17&quot;
 }</code>
  </pre>
     </span>
@@ -1475,10 +1475,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-pet--id-"
-               value="1"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the pet. Example: <code>1</code></p>
+<p>The ID of the pet. Example: <code>17</code></p>
             </div>
                     </form>
 
@@ -1496,7 +1496,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/pet/1" \
+    "http://localhost/api/v1/pet/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -1512,7 +1512,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet/1"
+    "http://localhost/api/v1/pet/17"
 );
 
 const headers = {
@@ -1538,7 +1538,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet/1';
+$url = 'http://localhost/api/v1/pet/17';
 $response = $client-&gt;put(
     $url,
     [
@@ -1654,10 +1654,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-pet--id-"
-               value="1"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the pet. Example: <code>1</code></p>
+<p>The ID of the pet. Example: <code>17</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1731,7 +1731,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/pet/1" \
+    "http://localhost/api/v1/pet/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1739,7 +1739,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet/1"
+    "http://localhost/api/v1/pet/17"
 );
 
 const headers = {
@@ -1756,7 +1756,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet/1';
+$url = 'http://localhost/api/v1/pet/17';
 $response = $client-&gt;delete(
     $url,
     [
@@ -1861,10 +1861,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-v1-pet--id-"
-               value="1"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the pet. Example: <code>1</code></p>
+<p>The ID of the pet. Example: <code>17</code></p>
             </div>
                     </form>
 
@@ -2497,7 +2497,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/person/1" \
+    --get "http://localhost/api/v1/person/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2505,7 +2505,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/1"
+    "http://localhost/api/v1/person/17"
 );
 
 const headers = {
@@ -2522,7 +2522,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/1';
+$url = 'http://localhost/api/v1/person/17';
 $response = $client-&gt;get(
     $url,
     [
@@ -2540,7 +2540,7 @@ print_r(json_decode((string) $body));</code></pre></div>
 
 <span id="example-responses-GETapi-v1-person--id-">
             <blockquote>
-            <p>Example response (401):</p>
+            <p>Example response (404):</p>
         </blockquote>
                 <details class="annotation">
             <summary style="cursor: pointer;">
@@ -2552,7 +2552,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;error&quot;: &quot;Invalid tokenWrong number of segments&quot;
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Person] 17&quot;
 }</code>
  </pre>
     </span>
@@ -2643,10 +2643,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-person--id-"
-               value="1"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>1</code></p>
+<p>The ID of the person. Example: <code>17</code></p>
             </div>
                     </form>
 
@@ -2664,7 +2664,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/person/1" \
+    "http://localhost/api/v1/person/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2678,7 +2678,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/1"
+    "http://localhost/api/v1/person/17"
 );
 
 const headers = {
@@ -2702,7 +2702,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/1';
+$url = 'http://localhost/api/v1/person/17';
 $response = $client-&gt;put(
     $url,
     [
@@ -2816,10 +2816,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-person--id-"
-               value="1"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>1</code></p>
+<p>The ID of the person. Example: <code>17</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2871,7 +2871,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/person/1" \
+    "http://localhost/api/v1/person/17" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2879,7 +2879,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/1"
+    "http://localhost/api/v1/person/17"
 );
 
 const headers = {
@@ -2896,7 +2896,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/1';
+$url = 'http://localhost/api/v1/person/17';
 $response = $client-&gt;delete(
     $url,
     [
@@ -3001,10 +3001,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-v1-person--id-"
-               value="1"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>1</code></p>
+<p>The ID of the person. Example: <code>17</code></p>
             </div>
                     </form>
 
@@ -3026,7 +3026,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/person/1/with-pets" \
+    --get "http://localhost/api/v1/person/17/with-pets" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3034,7 +3034,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/1/with-pets"
+    "http://localhost/api/v1/person/17/with-pets"
 );
 
 const headers = {
@@ -3051,7 +3051,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/1/with-pets';
+$url = 'http://localhost/api/v1/person/17/with-pets';
 $response = $client-&gt;get(
     $url,
     [
@@ -3085,6 +3085,10 @@ print_r(json_decode((string) $body));</code></pre></div>
             &quot;species&quot;: &quot;cat&quot;,
             &quot;breed&quot;: &quot;angora&quot;,
             &quot;age&quot;: &quot;10.00&quot;,
+            &quot;image_url&quot;: null,
+            &quot;life_span&quot;: null,
+            &quot;adaptability&quot;: null,
+            &quot;reference_image_id&quot;: null,
             &quot;created_at&quot;: &quot;2025-05-18&quot;
         },
         {
@@ -3093,6 +3097,10 @@ print_r(json_decode((string) $body));</code></pre></div>
             &quot;species&quot;: &quot;cat&quot;,
             &quot;breed&quot;: &quot;Criolla&quot;,
             &quot;age&quot;: &quot;8.00&quot;,
+            &quot;image_url&quot;: null,
+            &quot;life_span&quot;: null,
+            &quot;adaptability&quot;: null,
+            &quot;reference_image_id&quot;: null,
             &quot;created_at&quot;: &quot;2025-05-18&quot;
         },
         {
@@ -3101,6 +3109,10 @@ print_r(json_decode((string) $body));</code></pre></div>
             &quot;species&quot;: &quot;cat&quot;,
             &quot;breed&quot;: &quot;Criolla&quot;,
             &quot;age&quot;: &quot;8.00&quot;,
+            &quot;image_url&quot;: null,
+            &quot;life_span&quot;: null,
+            &quot;adaptability&quot;: null,
+            &quot;reference_image_id&quot;: null,
             &quot;created_at&quot;: &quot;2025-05-18&quot;
         },
         {
@@ -3109,6 +3121,10 @@ print_r(json_decode((string) $body));</code></pre></div>
             &quot;species&quot;: &quot;cat&quot;,
             &quot;breed&quot;: &quot;Abyssinian&quot;,
             &quot;age&quot;: &quot;8.00&quot;,
+            &quot;image_url&quot;: &quot;https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg&quot;,
+            &quot;life_span&quot;: &quot;14 - 15&quot;,
+            &quot;adaptability&quot;: 5,
+            &quot;reference_image_id&quot;: &quot;0XYvRd7oD&quot;,
             &quot;created_at&quot;: &quot;2025-05-18&quot;
         },
         {
@@ -3117,6 +3133,10 @@ print_r(json_decode((string) $body));</code></pre></div>
             &quot;species&quot;: &quot;Gato&quot;,
             &quot;breed&quot;: &quot;Abyssinian&quot;,
             &quot;age&quot;: &quot;5.00&quot;,
+            &quot;image_url&quot;: &quot;https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg&quot;,
+            &quot;life_span&quot;: &quot;14 - 15&quot;,
+            &quot;adaptability&quot;: 5,
+            &quot;reference_image_id&quot;: &quot;0XYvRd7oD&quot;,
             &quot;created_at&quot;: &quot;2025-05-18&quot;
         }
     ]
@@ -3210,10 +3230,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="person_id"                data-endpoint="GETapi-v1-person--person_id--with-pets"
-               value="1"
+               value="17"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>1</code></p>
+<p>The ID of the person. Example: <code>17</code></p>
             </div>
                     </form>
 

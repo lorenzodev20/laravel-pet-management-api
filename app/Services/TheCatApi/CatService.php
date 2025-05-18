@@ -18,7 +18,7 @@ class CatService
         $this->token = config('services.cat_api.api_key');
     }
 
-    public function breeds(int $page, int $perPage): ?string
+    public function breeds(int $page, int $perPage): ?array
     {
         return Http::withToken($this->token, self::TOKEN_TYPE)->get("{$this->baseUrl}/v1/breeds", [
             'page' => $page,
