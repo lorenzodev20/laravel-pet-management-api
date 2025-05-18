@@ -16,4 +16,6 @@ Route::prefix('v1')->middleware(['jwt.verify'])->group(function () {
     Route::get('person/{person}/with-pets', [\App\Http\Controllers\Api\V1\Person\PersonWithPetsController::class, 'index']);
     Route::apiResource('person', App\Http\Controllers\Api\V1\Person\PersonController::class);
     Route::apiResource('pet', App\Http\Controllers\Api\V1\Pet\PetController::class);
+    Route::get('pet/cat/breeds', [\App\Http\Controllers\Api\V1\Pet\CatController::class, 'breeds']);
+
 });

@@ -18,6 +18,10 @@ class Pet extends Model
         'species',
         'breed',
         'age',
+        'image_url',
+        'life_span',
+        'adaptability',
+        'reference_image_id',
     ];
 
     public function person()

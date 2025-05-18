@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api\V1\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class PetCollection extends ResourceCollection
+class CatBreedsCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -17,5 +17,5 @@ class PetCollection extends ResourceCollection
         return parent::toArray($request);
     }
 
-    public $collects = 'App\Http\Resources\Api\V1\Pet\PetWithOwnerResource';
+     public $collects = 'App\Http\Resources\Api\V1\Pet\CatBreedsResource';
 }

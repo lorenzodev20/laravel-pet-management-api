@@ -17,7 +17,7 @@ class UpdatePetRequest extends FormRequest
             'name' => "required|string|max:60",
             'species' => "required|string|max:60",
             'breed' => "required|string|max:60",
-            'age' => "required|number",
+            'age' => "required|integer",
             "person_id" => ["required", "integer", "exists:people,id"]
         ];
     }
