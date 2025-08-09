@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Laravel API Documentation</title>
+    <title>Pet Management API</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -27,7 +27,7 @@
             </style>
 
     <script>
-        var tryItOutBaseUrl = "http://localhost";
+        var tryItOutBaseUrl = "http://laravel-pet-management-api.test:8088";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
@@ -151,11 +151,12 @@
 
     <ul class="toc-footer" id="toc-footer">
                     <li style="padding-bottom: 5px;"><a href="{{ route("scribe.postman") }}">View Postman collection</a></li>
-                        <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                            <li style="padding-bottom: 5px;"><a href="{{ route("scribe.openapi") }}">View OpenAPI spec</a></li>
+                <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: May 18, 2025</li>
+        <li>Last updated: August 9, 2025</li>
     </ul>
 </div>
 
@@ -163,9 +164,9 @@
     <div class="dark-box"></div>
     <div class="content">
         <h1 id="introduction">Introduction</h1>
-<p>API para la gestión de mascotas con sus dueños</p>
+<p>API para la gestión de mascotas con sus dueños. Esta es una API RESTful robusta, desarrollada conLaravel 8.x+ y PHP, cuyo objetivo es gestionar personas y sus mascotas. La API utiliza JWT (JSON Web Tokens) para la autenticación de usuarios, garantizando la seguridad de las rutas privadas. El proyecto sigue una arquitectura sugerida que incluye el uso de controladores, servicios, repositorios, recursos y validadores (Form Requests) para mantener una estructura de código limpia y escalable.</p>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost</code>
+    <strong>Base URL</strong>: <code>http://laravel-pet-management-api.test:8088</code>
 </aside>
 <pre><code>Esta api esta realizada para gestionar los procesos CRUD de las mascotas y sus dueños (personas)
 
@@ -195,14 +196,19 @@
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/auth/login" \
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/login" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
+    --header "Accept: application/json" \
+    --data "{
+    \"email\": \"gbailey@example.net\",
+    \"password\": \"+-0pBNvYgxwmi\\/#iw\"
+}"
+</code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/login"
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/login"
 );
 
 const headers = {
@@ -210,21 +216,31 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "email": "gbailey@example.net",
+    "password": "+-0pBNvYgxwmi\/#iw"
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre></div>
 
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/auth/login';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/auth/login';
 $response = $client-&gt;post(
     $url,
     [
         'headers' =&gt; [
             'Content-Type' =&gt; 'application/json',
             'Accept' =&gt; 'application/json',
+        ],
+        'json' =&gt; [
+            'email' =&gt; 'gbailey@example.net',
+            'password' =&gt; '+-0pBNvYgxwmi/#iw',
         ],
     ]
 );
@@ -304,7 +320,30 @@ You can check the Dev Tools console for debugging information.</code></pre>
     <br>
 <p>Example: <code>application/json</code></p>
             </div>
-                        </form>
+                                <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="email"                data-endpoint="POSTapi-v1-auth-login"
+               value="gbailey@example.net"
+               data-component="body">
+    <br>
+<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>gbailey@example.net</code></p>
+        </div>
+                <div style=" padding-left: 28px;  clear: unset;">
+            <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
+<small>string</small>&nbsp;
+ &nbsp;
+                <input type="text" style="display: none"
+                              name="password"                data-endpoint="POSTapi-v1-auth-login"
+               value="+-0pBNvYgxwmi/#iw"
+               data-component="body">
+    <br>
+<p>Must be at least 6 characters. Example: <code>+-0pBNvYgxwmi/#iw</code></p>
+        </div>
+        </form>
 
                     <h2 id="auth-POSTapi-v1-auth-logout">Log the user out (Invalidate the token).</h2>
 
@@ -320,7 +359,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/auth/logout" \
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/logout" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -328,7 +367,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/logout"
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/logout"
 );
 
 const headers = {
@@ -345,7 +384,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/auth/logout';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/auth/logout';
 $response = $client-&gt;post(
     $url,
     [
@@ -459,7 +498,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/auth/me" \
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/me" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -467,7 +506,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/me"
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/me"
 );
 
 const headers = {
@@ -484,7 +523,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/auth/me';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/auth/me';
 $response = $client-&gt;post(
     $url,
     [
@@ -598,7 +637,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/auth/refresh" \
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/refresh" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -606,7 +645,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/refresh"
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/refresh"
 );
 
 const headers = {
@@ -623,7 +662,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/auth/refresh';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/auth/refresh';
 $response = $client-&gt;post(
     $url,
     [
@@ -736,20 +775,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/auth/register" \
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"vmqeopfuudtdsufvyvddq\",
-    \"email\": \"kunde.eloisa@example.com\",
-    \"password\": \"4[*UyPJ\\\"}6\"
+    \"name\": \"b\",
+    \"email\": \"zbailey@example.net\",
+    \"password\": \"-0pBNvYgxw\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/auth/register"
+    "http://laravel-pet-management-api.test:8088/api/v1/auth/register"
 );
 
 const headers = {
@@ -758,9 +797,9 @@ const headers = {
 };
 
 let body = {
-    "name": "vmqeopfuudtdsufvyvddq",
-    "email": "kunde.eloisa@example.com",
-    "password": "4[*UyPJ\"}6"
+    "name": "b",
+    "email": "zbailey@example.net",
+    "password": "-0pBNvYgxw"
 };
 
 fetch(url, {
@@ -772,7 +811,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/auth/register';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/auth/register';
 $response = $client-&gt;post(
     $url,
     [
@@ -781,9 +820,9 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'vmqeopfuudtdsufvyvddq',
-            'email' =&gt; 'kunde.eloisa@example.com',
-            'password' =&gt; '4[*UyPJ"}6',
+            'name' =&gt; 'b',
+            'email' =&gt; 'zbailey@example.net',
+            'password' =&gt; '-0pBNvYgxw',
         ],
     ]
 );
@@ -870,10 +909,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-v1-auth-register"
-               value="vmqeopfuudtdsufvyvddq"
+               value="b"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
+<p>Must not be greater than 255 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -881,10 +920,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-auth-register"
-               value="kunde.eloisa@example.com"
+               value="zbailey@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>kunde.eloisa@example.com</code></p>
+<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>zbailey@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>password</code></b>&nbsp;&nbsp;
@@ -892,10 +931,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="password"                data-endpoint="POSTapi-v1-auth-register"
-               value="4[*UyPJ"}6"
+               value="-0pBNvYgxw"
                data-component="body">
     <br>
-<p>Must be at least 6 characters. Example: <code>4[*UyPJ"}6</code></p>
+<p>Must be at least 6 characters. Example: <code>-0pBNvYgxw</code></p>
         </div>
         </form>
 
@@ -917,20 +956,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/pet" \
+    --get "http://laravel-pet-management-api.test:8088/api/v1/pet" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"page\": 17,
-    \"perPage\": 17
+    \"page\": 16,
+    \"perPage\": 16
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet"
+    "http://laravel-pet-management-api.test:8088/api/v1/pet"
 );
 
 const headers = {
@@ -940,8 +979,8 @@ const headers = {
 };
 
 let body = {
-    "page": 17,
-    "perPage": 17
+    "page": 16,
+    "perPage": 16
 };
 
 fetch(url, {
@@ -953,7 +992,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/pet';
 $response = $client-&gt;get(
     $url,
     [
@@ -963,8 +1002,8 @@ $response = $client-&gt;get(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'page' =&gt; 17,
-            'perPage' =&gt; 17,
+            'page' =&gt; 16,
+            'perPage' =&gt; 16,
         ],
     ]
 );
@@ -1078,10 +1117,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="page"                data-endpoint="GETapi-v1-pet"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>perPage</code></b>&nbsp;&nbsp;
@@ -1089,10 +1128,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="perPage"                data-endpoint="GETapi-v1-pet"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
         </form>
 
@@ -1110,23 +1149,23 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/pet" \
+    "http://laravel-pet-management-api.test:8088/api/v1/pet" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"vmqeopfuudtdsufvyvddq\",
-    \"species\": \"amniihfqcoynlazghdtqt\",
-    \"breed\": \"qxbajwbpilpmufinllwlo\",
-    \"age\": 17,
-    \"person_id\": 17
+    \"name\": \"b\",
+    \"species\": \"n\",
+    \"breed\": \"g\",
+    \"age\": 16,
+    \"person_id\": 16
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet"
+    "http://laravel-pet-management-api.test:8088/api/v1/pet"
 );
 
 const headers = {
@@ -1136,11 +1175,11 @@ const headers = {
 };
 
 let body = {
-    "name": "vmqeopfuudtdsufvyvddq",
-    "species": "amniihfqcoynlazghdtqt",
-    "breed": "qxbajwbpilpmufinllwlo",
-    "age": 17,
-    "person_id": 17
+    "name": "b",
+    "species": "n",
+    "breed": "g",
+    "age": 16,
+    "person_id": 16
 };
 
 fetch(url, {
@@ -1152,7 +1191,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/pet';
 $response = $client-&gt;post(
     $url,
     [
@@ -1162,11 +1201,11 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'vmqeopfuudtdsufvyvddq',
-            'species' =&gt; 'amniihfqcoynlazghdtqt',
-            'breed' =&gt; 'qxbajwbpilpmufinllwlo',
-            'age' =&gt; 17,
-            'person_id' =&gt; 17,
+            'name' =&gt; 'b',
+            'species' =&gt; 'n',
+            'breed' =&gt; 'g',
+            'age' =&gt; 16,
+            'person_id' =&gt; 16,
         ],
     ]
 );
@@ -1264,10 +1303,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-v1-pet"
-               value="vmqeopfuudtdsufvyvddq"
+               value="b"
                data-component="body">
     <br>
-<p>Must not be greater than 60 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
+<p>Must not be greater than 60 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>species</code></b>&nbsp;&nbsp;
@@ -1275,10 +1314,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="species"                data-endpoint="POSTapi-v1-pet"
-               value="amniihfqcoynlazghdtqt"
+               value="n"
                data-component="body">
     <br>
-<p>Must not be greater than 60 characters. Example: <code>amniihfqcoynlazghdtqt</code></p>
+<p>Must not be greater than 60 characters. Example: <code>n</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>breed</code></b>&nbsp;&nbsp;
@@ -1286,10 +1325,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="breed"                data-endpoint="POSTapi-v1-pet"
-               value="qxbajwbpilpmufinllwlo"
+               value="g"
                data-component="body">
     <br>
-<p>Must not be greater than 60 characters. Example: <code>qxbajwbpilpmufinllwlo</code></p>
+<p>Must not be greater than 60 characters. Example: <code>g</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>age</code></b>&nbsp;&nbsp;
@@ -1297,10 +1336,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="age"                data-endpoint="POSTapi-v1-pet"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>person_id</code></b>&nbsp;&nbsp;
@@ -1308,10 +1347,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="person_id"                data-endpoint="POSTapi-v1-pet"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the people table. Example: <code>17</code></p>
+<p>The <code>id</code> of an existing record in the people table. Example: <code>16</code></p>
         </div>
         </form>
 
@@ -1329,7 +1368,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/pet/17" \
+    --get "http://laravel-pet-management-api.test:8088/api/v1/pet/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1337,7 +1376,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet/17"
+    "http://laravel-pet-management-api.test:8088/api/v1/pet/16"
 );
 
 const headers = {
@@ -1354,7 +1393,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet/17';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/pet/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -1384,7 +1423,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;No query results for model [App\\Models\\Pet] 17&quot;
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Pet] 16&quot;
 }</code>
  </pre>
     </span>
@@ -1475,10 +1514,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-pet--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the pet. Example: <code>17</code></p>
+<p>The ID of the pet. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -1496,23 +1535,23 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/pet/17" \
+    "http://laravel-pet-management-api.test:8088/api/v1/pet/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"vmqeopfuudtdsufvyvddq\",
-    \"species\": \"amniihfqcoynlazghdtqt\",
-    \"breed\": \"qxbajwbpilpmufinllwlo\",
-    \"age\": 17,
-    \"person_id\": 17
+    \"name\": \"b\",
+    \"species\": \"n\",
+    \"breed\": \"g\",
+    \"age\": 16,
+    \"person_id\": 16
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet/17"
+    "http://laravel-pet-management-api.test:8088/api/v1/pet/16"
 );
 
 const headers = {
@@ -1522,11 +1561,11 @@ const headers = {
 };
 
 let body = {
-    "name": "vmqeopfuudtdsufvyvddq",
-    "species": "amniihfqcoynlazghdtqt",
-    "breed": "qxbajwbpilpmufinllwlo",
-    "age": 17,
-    "person_id": 17
+    "name": "b",
+    "species": "n",
+    "breed": "g",
+    "age": 16,
+    "person_id": 16
 };
 
 fetch(url, {
@@ -1538,7 +1577,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet/17';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/pet/16';
 $response = $client-&gt;put(
     $url,
     [
@@ -1548,11 +1587,11 @@ $response = $client-&gt;put(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'vmqeopfuudtdsufvyvddq',
-            'species' =&gt; 'amniihfqcoynlazghdtqt',
-            'breed' =&gt; 'qxbajwbpilpmufinllwlo',
-            'age' =&gt; 17,
-            'person_id' =&gt; 17,
+            'name' =&gt; 'b',
+            'species' =&gt; 'n',
+            'breed' =&gt; 'g',
+            'age' =&gt; 16,
+            'person_id' =&gt; 16,
         ],
     ]
 );
@@ -1654,10 +1693,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-pet--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the pet. Example: <code>17</code></p>
+<p>The ID of the pet. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -1666,10 +1705,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PUTapi-v1-pet--id-"
-               value="vmqeopfuudtdsufvyvddq"
+               value="b"
                data-component="body">
     <br>
-<p>Must not be greater than 60 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
+<p>Must not be greater than 60 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>species</code></b>&nbsp;&nbsp;
@@ -1677,10 +1716,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="species"                data-endpoint="PUTapi-v1-pet--id-"
-               value="amniihfqcoynlazghdtqt"
+               value="n"
                data-component="body">
     <br>
-<p>Must not be greater than 60 characters. Example: <code>amniihfqcoynlazghdtqt</code></p>
+<p>Must not be greater than 60 characters. Example: <code>n</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>breed</code></b>&nbsp;&nbsp;
@@ -1688,10 +1727,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="breed"                data-endpoint="PUTapi-v1-pet--id-"
-               value="qxbajwbpilpmufinllwlo"
+               value="g"
                data-component="body">
     <br>
-<p>Must not be greater than 60 characters. Example: <code>qxbajwbpilpmufinllwlo</code></p>
+<p>Must not be greater than 60 characters. Example: <code>g</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>age</code></b>&nbsp;&nbsp;
@@ -1699,10 +1738,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="age"                data-endpoint="PUTapi-v1-pet--id-"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>person_id</code></b>&nbsp;&nbsp;
@@ -1710,10 +1749,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="person_id"                data-endpoint="PUTapi-v1-pet--id-"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>The <code>id</code> of an existing record in the people table. Example: <code>17</code></p>
+<p>The <code>id</code> of an existing record in the people table. Example: <code>16</code></p>
         </div>
         </form>
 
@@ -1731,7 +1770,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/pet/17" \
+    "http://laravel-pet-management-api.test:8088/api/v1/pet/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -1739,7 +1778,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet/17"
+    "http://laravel-pet-management-api.test:8088/api/v1/pet/16"
 );
 
 const headers = {
@@ -1756,7 +1795,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet/17';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/pet/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -1861,10 +1900,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-v1-pet--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the pet. Example: <code>17</code></p>
+<p>The ID of the pet. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -1882,20 +1921,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/pet/cat/breeds?page=0&amp;perPage=10" \
+    --get "http://laravel-pet-management-api.test:8088/api/v1/pet/cat/breeds?page=0&amp;perPage=10" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"page\": 17,
-    \"perPage\": 17
+    \"page\": 16,
+    \"perPage\": 16
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/pet/cat/breeds"
+    "http://laravel-pet-management-api.test:8088/api/v1/pet/cat/breeds"
 );
 
 const params = {
@@ -1912,8 +1951,8 @@ const headers = {
 };
 
 let body = {
-    "page": 17,
-    "perPage": 17
+    "page": 16,
+    "perPage": 16
 };
 
 fetch(url, {
@@ -1925,7 +1964,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/pet/cat/breeds';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/pet/cat/breeds';
 $response = $client-&gt;get(
     $url,
     [
@@ -1939,8 +1978,8 @@ $response = $client-&gt;get(
             'perPage' =&gt; '10',
         ],
         'json' =&gt; [
-            'page' =&gt; 17,
-            'perPage' =&gt; 17,
+            'page' =&gt; 16,
+            'perPage' =&gt; 16,
         ],
     ]
 );
@@ -2077,10 +2116,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="page"                data-endpoint="GETapi-v1-pet-cat-breeds"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>perPage</code></b>&nbsp;&nbsp;
@@ -2088,10 +2127,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="perPage"                data-endpoint="GETapi-v1-pet-cat-breeds"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
         </form>
 
@@ -2113,20 +2152,20 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/person" \
+    --get "http://laravel-pet-management-api.test:8088/api/v1/person" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"page\": 17,
-    \"perPage\": 17
+    \"page\": 16,
+    \"perPage\": 16
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person"
+    "http://laravel-pet-management-api.test:8088/api/v1/person"
 );
 
 const headers = {
@@ -2136,8 +2175,8 @@ const headers = {
 };
 
 let body = {
-    "page": 17,
-    "perPage": 17
+    "page": 16,
+    "perPage": 16
 };
 
 fetch(url, {
@@ -2149,7 +2188,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/person';
 $response = $client-&gt;get(
     $url,
     [
@@ -2159,8 +2198,8 @@ $response = $client-&gt;get(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'page' =&gt; 17,
-            'perPage' =&gt; 17,
+            'page' =&gt; 16,
+            'perPage' =&gt; 16,
         ],
     ]
 );
@@ -2274,10 +2313,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="page"                data-endpoint="GETapi-v1-person"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>perPage</code></b>&nbsp;&nbsp;
@@ -2285,10 +2324,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="perPage"                data-endpoint="GETapi-v1-person"
-               value="17"
+               value="16"
                data-component="body">
     <br>
-<p>Example: <code>17</code></p>
+<p>Example: <code>16</code></p>
         </div>
         </form>
 
@@ -2306,21 +2345,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/v1/person" \
+    "http://laravel-pet-management-api.test:8088/api/v1/person" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"vmqeopfuudtdsufvyvddq\",
-    \"email\": \"kunde.eloisa@example.com\",
-    \"birthdate\": \"2025-05-18\"
+    \"name\": \"b\",
+    \"email\": \"zbailey@example.net\",
+    \"birthdate\": \"2025-08-09\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person"
+    "http://laravel-pet-management-api.test:8088/api/v1/person"
 );
 
 const headers = {
@@ -2330,9 +2369,9 @@ const headers = {
 };
 
 let body = {
-    "name": "vmqeopfuudtdsufvyvddq",
-    "email": "kunde.eloisa@example.com",
-    "birthdate": "2025-05-18"
+    "name": "b",
+    "email": "zbailey@example.net",
+    "birthdate": "2025-08-09"
 };
 
 fetch(url, {
@@ -2344,7 +2383,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/person';
 $response = $client-&gt;post(
     $url,
     [
@@ -2354,9 +2393,9 @@ $response = $client-&gt;post(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'vmqeopfuudtdsufvyvddq',
-            'email' =&gt; 'kunde.eloisa@example.com',
-            'birthdate' =&gt; '2025-05-18',
+            'name' =&gt; 'b',
+            'email' =&gt; 'zbailey@example.net',
+            'birthdate' =&gt; '2025-08-09',
         ],
     ]
 );
@@ -2454,10 +2493,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="POSTapi-v1-person"
-               value="vmqeopfuudtdsufvyvddq"
+               value="b"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
+<p>Must not be greater than 255 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -2465,10 +2504,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="POSTapi-v1-person"
-               value="kunde.eloisa@example.com"
+               value="zbailey@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>kunde.eloisa@example.com</code></p>
+<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>zbailey@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>birthdate</code></b>&nbsp;&nbsp;
@@ -2476,10 +2515,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="birthdate"                data-endpoint="POSTapi-v1-person"
-               value="2025-05-18"
+               value="2025-08-09"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>Y-m-d</code>. Example: <code>2025-05-18</code></p>
+<p>Must be a valid date in the format <code>Y-m-d</code>. Example: <code>2025-08-09</code></p>
         </div>
         </form>
 
@@ -2497,7 +2536,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/person/17" \
+    --get "http://laravel-pet-management-api.test:8088/api/v1/person/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2505,7 +2544,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/17"
+    "http://laravel-pet-management-api.test:8088/api/v1/person/16"
 );
 
 const headers = {
@@ -2522,7 +2561,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/17';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/person/16';
 $response = $client-&gt;get(
     $url,
     [
@@ -2552,7 +2591,7 @@ access-control-allow-origin: *
  </code></pre></details>         <pre>
 
 <code class="language-json" style="max-height: 300px;">{
-    &quot;message&quot;: &quot;No query results for model [App\\Models\\Person] 17&quot;
+    &quot;message&quot;: &quot;No query results for model [App\\Models\\Person] 16&quot;
 }</code>
  </pre>
     </span>
@@ -2643,10 +2682,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="GETapi-v1-person--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>17</code></p>
+<p>The ID of the person. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -2664,21 +2703,21 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/v1/person/17" \
+    "http://laravel-pet-management-api.test:8088/api/v1/person/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"name\": \"vmqeopfuudtdsufvyvddq\",
-    \"email\": \"kunde.eloisa@example.com\",
-    \"birthdate\": \"2025-05-18\"
+    \"name\": \"b\",
+    \"email\": \"zbailey@example.net\",
+    \"birthdate\": \"2025-08-09\"
 }"
 </code></pre></div>
 
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/17"
+    "http://laravel-pet-management-api.test:8088/api/v1/person/16"
 );
 
 const headers = {
@@ -2688,9 +2727,9 @@ const headers = {
 };
 
 let body = {
-    "name": "vmqeopfuudtdsufvyvddq",
-    "email": "kunde.eloisa@example.com",
-    "birthdate": "2025-05-18"
+    "name": "b",
+    "email": "zbailey@example.net",
+    "birthdate": "2025-08-09"
 };
 
 fetch(url, {
@@ -2702,7 +2741,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/17';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/person/16';
 $response = $client-&gt;put(
     $url,
     [
@@ -2712,9 +2751,9 @@ $response = $client-&gt;put(
             'Accept' =&gt; 'application/json',
         ],
         'json' =&gt; [
-            'name' =&gt; 'vmqeopfuudtdsufvyvddq',
-            'email' =&gt; 'kunde.eloisa@example.com',
-            'birthdate' =&gt; '2025-05-18',
+            'name' =&gt; 'b',
+            'email' =&gt; 'zbailey@example.net',
+            'birthdate' =&gt; '2025-08-09',
         ],
     ]
 );
@@ -2816,10 +2855,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="PUTapi-v1-person--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>17</code></p>
+<p>The ID of the person. Example: <code>16</code></p>
             </div>
                             <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
         <div style=" padding-left: 28px;  clear: unset;">
@@ -2828,10 +2867,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="name"                data-endpoint="PUTapi-v1-person--id-"
-               value="vmqeopfuudtdsufvyvddq"
+               value="b"
                data-component="body">
     <br>
-<p>Must not be greater than 255 characters. Example: <code>vmqeopfuudtdsufvyvddq</code></p>
+<p>Must not be greater than 255 characters. Example: <code>b</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>email</code></b>&nbsp;&nbsp;
@@ -2839,10 +2878,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="email"                data-endpoint="PUTapi-v1-person--id-"
-               value="kunde.eloisa@example.com"
+               value="zbailey@example.net"
                data-component="body">
     <br>
-<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>kunde.eloisa@example.com</code></p>
+<p>Must be a valid email address. Must not be greater than 255 characters. Example: <code>zbailey@example.net</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>birthdate</code></b>&nbsp;&nbsp;
@@ -2850,10 +2889,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
 <i>optional</i> &nbsp;
                 <input type="text" style="display: none"
                               name="birthdate"                data-endpoint="PUTapi-v1-person--id-"
-               value="2025-05-18"
+               value="2025-08-09"
                data-component="body">
     <br>
-<p>Must be a valid date in the format <code>Y-m-d</code>. Example: <code>2025-05-18</code></p>
+<p>Must be a valid date in the format <code>Y-m-d</code>. Example: <code>2025-08-09</code></p>
         </div>
         </form>
 
@@ -2871,7 +2910,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/v1/person/17" \
+    "http://laravel-pet-management-api.test:8088/api/v1/person/16" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -2879,7 +2918,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/17"
+    "http://laravel-pet-management-api.test:8088/api/v1/person/16"
 );
 
 const headers = {
@@ -2896,7 +2935,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/17';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/person/16';
 $response = $client-&gt;delete(
     $url,
     [
@@ -3001,10 +3040,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="id"                data-endpoint="DELETEapi-v1-person--id-"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>17</code></p>
+<p>The ID of the person. Example: <code>16</code></p>
             </div>
                     </form>
 
@@ -3026,7 +3065,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="bash-example">
     <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/v1/person/17/with-pets" \
+    --get "http://laravel-pet-management-api.test:8088/api/v1/person/16/with-pets" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre></div>
@@ -3034,7 +3073,7 @@ You can check the Dev Tools console for debugging information.</code></pre>
 
 <div class="javascript-example">
     <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/v1/person/17/with-pets"
+    "http://laravel-pet-management-api.test:8088/api/v1/person/16/with-pets"
 );
 
 const headers = {
@@ -3051,7 +3090,7 @@ fetch(url, {
 
 <div class="php-example">
     <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$url = 'http://localhost/api/v1/person/17/with-pets';
+$url = 'http://laravel-pet-management-api.test:8088/api/v1/person/16/with-pets';
 $response = $client-&gt;get(
     $url,
     [
@@ -3230,10 +3269,10 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="number" style="display: none"
                step="any"               name="person_id"                data-endpoint="GETapi-v1-person--person_id--with-pets"
-               value="17"
+               value="16"
                data-component="url">
     <br>
-<p>The ID of the person. Example: <code>17</code></p>
+<p>The ID of the person. Example: <code>16</code></p>
             </div>
                     </form>
 

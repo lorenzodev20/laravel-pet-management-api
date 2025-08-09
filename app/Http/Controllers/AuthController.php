@@ -10,6 +10,7 @@ use Firebase\JWT\ExpiredException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Knuckles\Scribe\Attributes\Group;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\Auth\UserResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Auth\RegisterRequest;
@@ -24,9 +25,9 @@ class AuthController extends Controller
      * Get a JWT via given credentials.
      * @return JsonResponse
      */
-    public function login(): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        $credentials = request(['email', 'password']);
+        $credentials = $request->all(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);

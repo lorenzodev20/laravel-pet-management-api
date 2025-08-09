@@ -9,10 +9,10 @@ use function Knuckles\Scribe\Config\{removeStrategies, configureStrategy};
 
 return [
     // The HTML <title> for the generated documentation.
-    'title' => config('app.name').' API Documentation',
+    'title' => config('app.name'),
 
     // A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
-    'description' => 'API para la gestión de mascotas con sus dueños',
+    'description' => 'API para la gestión de mascotas con sus dueños. Esta es una API RESTful robusta, desarrollada conLaravel 8.x+ y PHP, cuyo objetivo es gestionar personas y sus mascotas. La API utiliza JWT (JSON Web Tokens) para la autenticación de usuarios, garantizando la seguridad de las rutas privadas. El proyecto sigue una arquitectura sugerida que incluye el uso de controladores, servicios, repositorios, recursos y validadores (Form Requests) para mantener una estructura de código limpia y escalable.',
 
     // The base URL displayed in the docs.
     // If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
@@ -135,7 +135,7 @@ return [
     'example_languages' => [
         'bash',
         'javascript',
-        'php'
+        'php',
     ],
 
     // Generate a Postman collection (v2.1.0) in addition to HTML docs.
@@ -155,7 +155,7 @@ return [
     // For 'laravel' docs, it will be generated to storage/app/scribe/openapi.yaml.
     // Setting `laravel.add_routes` to true (above) will also add a route for the spec.
     'openapi' => [
-        'enabled' => false,
+        'enabled' => true,
 
         'overrides' => [
             // 'info.version' => '2.0.0',
