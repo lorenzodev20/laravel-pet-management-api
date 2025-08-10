@@ -12,13 +12,16 @@ use App\Repositories\PetRepository;
 use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use App\Repositories\PersonRepository;
+use Knuckles\Scribe\Attributes\Header;
 use Knuckles\Scribe\Attributes\Authenticated;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\Api\V1\Person\PersonResource;
 use App\Http\Resources\Api\V1\Person\PersonWithPetResource;
 
-#[Group("Reporte de mascotas", "API para ver las mascotas que tiene una persona")]
+#[Group("Reports", "API Reports")]
 #[Authenticated()]
+#[Header('Accept', 'application/json')]
+#[Header('Content-Type', 'application/json')]
 class PersonWithPetsController extends Controller
 {
     use ApiResponseTrait;

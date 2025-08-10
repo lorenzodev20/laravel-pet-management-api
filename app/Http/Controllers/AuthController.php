@@ -10,6 +10,7 @@ use Firebase\JWT\ExpiredException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Knuckles\Scribe\Attributes\Group;
+use Knuckles\Scribe\Attributes\Header;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\Auth\UserResource;
 use Illuminate\Support\Facades\Validator;
@@ -19,6 +20,8 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 
 #[Group("Auth", "Autenticación de un usuario en el API")]
+#[Header('Accept', 'application/json')]
+#[Header('Content-Type', 'application/json')]
 class AuthController extends Controller
 {
     /**
@@ -36,6 +39,10 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /**
+     * Store new User
+     * @return JsonResponse
+     */
     public function register(RegisterRequest $request): JsonResponse
     {
         $user = User::create([

@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Knuckles\Scribe\Attributes\Group;
 use App\Repositories\PersonRepository;
 use App\Services\TheCatApi\CatService;
+use Knuckles\Scribe\Attributes\Header;
 use App\Services\Pet\CompletePetService;
 use App\Http\Requests\SamplePaginatorRequest;
 use Knuckles\Scribe\Attributes\Authenticated;
@@ -23,8 +24,10 @@ use App\Http\Resources\Api\V1\Pet\PetCollection;
 use App\Http\Requests\Api\V1\Pet\CreatePetRequest;
 use App\Http\Requests\Api\V1\Pet\UpdatePetRequest;
 
-#[Group("Mascotas", "API RESTful para la gestión de las mascotas")]
+#[Group("Pet", "Pet Management")]
 #[Authenticated()]
+#[Header('Accept', 'application/json')]
+#[Header('Content-Type', 'application/json')]
 class PetController extends Controller
 {
     use ApiResponseTrait;
