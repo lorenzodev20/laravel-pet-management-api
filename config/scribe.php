@@ -9,10 +9,16 @@ use function Knuckles\Scribe\Config\{removeStrategies, configureStrategy};
 
 return [
     // The HTML <title> for the generated documentation.
-    'title' => config('app.name'),
+    // 'title' => config('app.name'),
+    'title' => 'Pet Management API',
 
     // A short description of your API. Will be included in the docs webpage, Postman collection and OpenAPI spec.
-    'description' => 'API para la gestión de mascotas con sus dueños. Esta es una API RESTful robusta, desarrollada conLaravel 8.x+ y PHP, cuyo objetivo es gestionar personas y sus mascotas. La API utiliza JWT (JSON Web Tokens) para la autenticación de usuarios, garantizando la seguridad de las rutas privadas. El proyecto sigue una arquitectura sugerida que incluye el uso de controladores, servicios, repositorios, recursos y validadores (Form Requests) para mantener una estructura de código limpia y escalable.',
+    'description' => 'API para la gestión de mascotas con sus dueños(En este caso Gatos). Esta es una API RESTful robusta, desarrollada conLaravel 8.x+ y PHP, cuyo objetivo es gestionar personas y sus mascotas. La API utiliza JWT (JSON Web Tokens) para la autenticación de usuarios, garantizando la seguridad de las rutas privadas. El proyecto sigue una arquitectura sugerida que incluye el uso de controladores, servicios, repositorios, recursos y validadores (Form Requests) para mantener una estructura de código limpia y escalable.',
+
+    // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
+    'intro_text' => <<<INTRO
+    Esta api esta realizada para gestionar los procesos CRUD de las mascotas y sus dueños (personas)
+    INTRO,
 
     // The base URL displayed in the docs.
     // If you're using `laravel` type, you can set this to a dynamic string, like '{{ config("app.tenant_url") }}' to get a dynamic base URL.
@@ -118,15 +124,6 @@ return [
         // Any extra authentication-related info for your users. Markdown and HTML are supported.
         'extra_info' => 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.',
     ],
-
-    // Text to place in the "Introduction" section, right after the `description`. Markdown and HTML are supported.
-    'intro_text' => <<<INTRO
-        Esta api esta realizada para gestionar los procesos CRUD de las mascotas y sus dueños (personas)
-
-        <aside>
-            A medida que se vaya desplazando por el sitio descubrirá las apis disponible para su utilización asi como las respuestas
-        </aside>
-    INTRO,
 
     // Example requests for each endpoint will be shown in each of these languages.
     // Supported options are: bash, javascript, php, python

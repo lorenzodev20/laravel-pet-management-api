@@ -1,4 +1,35 @@
-# API RESTFul para la gestión de las personas y sus mascotas  
+# API para la gestión de las personas y sus mascotas
+
+### Despliegue del API y Documentación [AQUÍ](https://github.com/lorenzodev20/laravel-pet-management-api)
+
+## Descripción del proyecto:
+Esta es una API RESTful robusta, desarrollada con Laravel 8.x+ y PHP, cuyo objetivo es gestionar personas y sus mascotas. La API utiliza JWT (JSON Web Tokens) para la autenticación de usuarios, garantizando la seguridad de las rutas privadas.
+
+El proyecto sigue una arquitectura sugerida que incluye el uso de controladores, servicios, repositorios, recursos y validadores (Form Requests) para mantener una estructura de código limpia y escalable. La base de datos utilizada es MySQL o MariaDB y se integra con Eloquent como ORM.
+
+### Módulos y Funcionalidades Principales
+Autenticación:
+- Registro e inicio de sesión de usuarios.
+- Endpoint para obtener la información del usuario autenticado.
+- Middleware para proteger las rutas que requieren autenticación.
+
+#### Gestión de Personas:
+Un CRUD completo (Crear, Consultar, Actualizar, Eliminar) para la gestión de personas. Campos de ejemplo: nombre, email, fecha de nacimiento.
+
+#### Gestión de Mascotas:
+Un CRUD completo para la gestión de mascotas. Una persona puede tener varias mascotas, reflejando una relación uno a muchos.
+Campos de ejemplo: nombre, especie, raza, edad, persona_id.
+
+#### Consulta Avanzada:
+Endpoint dedicado para consultar una persona y todas sus mascotas asociadas.
+
+#### Integración con API Externa:
+Al crear una nueva mascota, la API se integra con una API externa (como TheDogAPI o TheCatAPI) para completar automáticamente información relevante como la raza y la imagen de la mascota.
+
+#### Características Técnicas Adicionales
+- Uso de migraciones, seeders y factories para la gestión de la base de datos y datos de prueba. Validaciones robustas a través de Form Requests.
+- Las respuestas de la API están estandarizadas con Laravel API Resources y manejan códigos HTTP apropiados.
+- Manejo de errores global con mensajes claros.
 
 ## Tecnologías y herramientas:
 - PHP 8.2.28
@@ -50,5 +81,3 @@ Y actualizará el resto de los campos.
 
 
 Respecto a la documentación si desean actualizarla pueden ejecutar el comando: ```php artisan scribe:generate``` y podrán acceder a la misma.
-
-También comparto mi colección de POSTMAN si desean usarla [AQUÍ](https://documenter.getpostman.com/view/18208862/2sB2qXji4P)
